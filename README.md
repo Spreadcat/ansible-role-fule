@@ -334,7 +334,7 @@ If you want a fully working example, please see the next example.
 ansible \
   --inventory localhost, all \
   --connection local \
-  --module-name include_role --args name=dbv.folecule \
+  --module-name include_role --args name=dbv.fule \
   --extra-vars fule_working_dir=/tmp \
   --extra-vars fule_role_name=dbv.newrole
 ```
