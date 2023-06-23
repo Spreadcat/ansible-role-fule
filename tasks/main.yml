@@ -3,6 +3,17 @@
   ansible.builtin.include_tasks:
     file: 'requirements.yml'
 
+- name: Main | Include variable files.
+  ansible.builtin.include_vars:
+    file: "{{ item }}"
+  with_first_found:
+    - files:
+        - "{{ lookup('env', 'USER') }}/.ansible/fule.conf.yml"
+        - "{{ lookup('env', 'USER') }}/.ansible/fule.cnf.yml"
+        - "{{ lookup('env', 'USER') }}/.ansible/fule.yml"
+        - "{{ lookup('env', 'USER') }}/.ansible/fule.cnf"
+      skip: true
+
 # tasks files
 - name: Main | Include install tasks
   ansible.builtin.include_tasks: install.yml
