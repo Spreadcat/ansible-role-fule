@@ -1,0 +1,35 @@
+---
+# Ansible playbook for verification.
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Verify | Load the roles default variables.
+      ansible.builtin.include_vars:
+        file: ../../defaults/main.yml
+
+    - name: Verify | Assert the meta file has been created correctly.
+      ansible.builtin.lineinfile:
+        name: "/tmp/dbv.testrole/meta/main.yml"
+        line: "{{ verify_line }}"
+        state: present
+      check_mode: true
+      loop:
+        - '  author: Ola Nordmann'
+        - '  namespace: dbv'
+        - '  company: ""'
+        - '  role_name: testrole'
+        - '  license: "MIT"'
+        - '  min_ansible_version: "2.1"'
+        - '    - name: Fedora'
+        - '      versions:'
+        - '        - "37"'
+        - '    - name: Ubuntu'
+        - '      versions:'
+        - '        - "jammy"'
+      loop_control:
+        loop_var: verify_line
+      register: __verify_file
+      failed_when: >
+        __verify_file is changed or
+        __verify_file is failed

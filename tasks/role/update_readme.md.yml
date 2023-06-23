@@ -1,0 +1,15 @@
+---
+- name: Udpate_Readme | Stat of Readme.md file.
+  ansible.builtin.stat:
+    path: "{{ __fule_role_path }}/README.md"
+  register: __fule_readme_md
+
+- name: Update_Readme | Manage default Readme file.
+  ansible.builtin.template:
+    dest: "{{ __fule_role_path }}/README.md"
+    src: "{{ fule_readme_template }}"
+    mode: '0655'
+    force: true
+  when:
+    - not __fule_readme_md.stat.exists
+      or __fule_readme_md.stat.checksum == fule_readme_checksum

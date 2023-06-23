@@ -1,0 +1,19 @@
+---
+# vars file for folecule
+# Default test squence used by molecule when no other
+# sequence has been specified.
+#
+# Example:
+#  fule_molecule_default_test_sequence:
+#    - lint
+#    - destroy
+fule_molecule_default_test_sequence:
+  - lint
+  - destroy
+  - syntax
+  - create
+  - prepare
+  - converge
+  - idempotence
+  - verify
+  - destroy

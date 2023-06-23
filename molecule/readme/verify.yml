@@ -1,0 +1,29 @@
+---
+# Ansible playbook for verification.
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Verify | Load the roles default variables.
+      ansible.builtin.include_vars:
+        file: ../../defaults/main.yml
+
+    - name: Verify | Assert the README.md file has been replaced.
+      ansible.builtin.stat:
+        path: /tmp/dbv.testrole/README.md
+      register: __fule_stat_readme_md
+      failed_when: __fule_stat_readme_md.stat.checksum == fule_readme_checksum
+
+    - name: Verify | Ensure all lines have been replaced in the README.md file.
+      ansible.builtin.lineinfile:
+        path: "/tmp/dbv.testrole/README.md"
+        line: "{{ item.line }}"
+        state: "{{ item.state | default(omit) }}"
+      register: __fule_readme_content
+      check_mode: true
+      failed_when: __fule_readme_content.changed
+      loop:
+        - line: "# Role dbv.testrole"
+        - line: "    - role: dbv.testrole"
+        - line: "MIT"
+        - line: "This role was created and is maintained by Ola Nordmann."

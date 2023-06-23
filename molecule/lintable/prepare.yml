@@ -1,0 +1,24 @@
+---
+- name: Prepare the environment.
+  hosts: all
+  gather_facts: true
+  tasks:
+
+    - name: Prepare | Install yamllint.
+      ansible.builtin.pip:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - yamllint
+
+    - name: Prepare | Install ansible-lint.
+      when:
+        - (ansible_distribution != 'Ubuntu'
+          or (ansible_distribution == 'Ubuntu'
+            and ansible_distribution_version != '20.04')
+          )
+      ansible.builtin.pip:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - ansible-lint

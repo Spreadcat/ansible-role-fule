@@ -1,0 +1,29 @@
+---
+- name: Create | Create molecule scenario directories.
+  ansible.builtin.file:
+    path: "{{ __fule_role_path }}/molecule/{{ __fule_current_scenario_name }}"
+    state: directory
+    mode: '0755'
+
+- name: Create | Deploy molecule scenario configuration files.
+  ansible.builtin.template:
+    src: "{{ molecule_obj['template'] }}"
+    # yamllint disable-line rule:line-length
+    dest: "{{ __fule_role_path }}/molecule/{{ __fule_current_scenario_name }}/{{ molecule_obj.file }}"
+    mode: '0644'
+    force: "{{ molecule_obj['force'] | default(false) }}"
+  loop_control:
+    loop_var: molecule_obj
+  loop:
+    - template: molecule/molecule.yml.j2
+      file: molecule.yml
+      force: true
+    - template: molecule/prepare.yml.j2
+      file: prepare.yml
+      force: false
+    - template: molecule/verify.yml.j2
+      file: verify.yml
+      force: false
+    - template: molecule/converge.yml.j2
+      file: converge.yml
+      force: false

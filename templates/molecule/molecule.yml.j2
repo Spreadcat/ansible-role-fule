@@ -1,0 +1,65 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: podman
+platforms:
+
+{% for platform in fule_molecule_platforms %}
+  - name: {{ platform['name'] | lower }}{{ platform['release'] }}
+    image: {{ platform['image'] }}
+{%  for key, value in platform['specs'].items() -%}
+{%    if value == True %}
+    {{ key }}: {{ value | lower }}
+{%    else %}
+    {{ key }}: {{ value }}
+{%    endif -%}
+{%   endfor -%}
+{% endfor -%}
+
+{% set provisioner_hostvars = {} -%}
+{% for platform in fule_molecule_platforms -%}
+{%   if platform['provisioner'] is defined and platform['provisioner']['hostvars'] is defined -%}
+{%     if provisioner_hostvars[platform['name']] is defined -%}
+{%       set _ = provisioner_hostvars[platform['name'] + platform['release'] | string].append(platform['provisioner']['hostvars']) -%}
+{%     else -%}
+{%       set _ =  provisioner_hostvars.__setitem__(platform['name'] + platform['release'] | string, platform['provisioner']['hostvars']) -%}
+{%     endif -%}
+{%   endif -%}
+{% endfor -%}
+
+provisioner:
+  name: {{ fule_molecule_provisioner_name }}
+{% if provisioner_hostvars | length > 0 %}
+  inventory:
+    hostvars:
+{%   for host, variable in provisioner_hostvars.items() %}
+      {{ host | lower }}:
+{%     for inv_var, inv_value in variable.items() %}
+        {{ inv_var }}: {{ inv_value }}
+{%     endfor -%}
+{%   endfor -%}
+{% endif %}
+  config_options:
+    defaults:
+      interpreter_python: auto_silent
+      callback_whitelist: profile_tasks, timer, yaml
+    ssh_connections:
+      pipelining: true
+verifier:
+  name: ansible
+scenario:
+  name: {{ __fule_current_scenario_name }}
+  test_sequence:
+{% if fule_molecule_scenario_test_sequence | length == 0 -%}
+{%   set __fule_molecule_sequence = fule_molecule_default_test_sequence -%}
+{% else -%}
+{%   set __fule_molecule_sequence = fule_molecule_scenario_test_sequence -%}
+{% endif -%}
+{% for sequence_step in __fule_molecule_sequence %}
+    - {{ sequence_step }}
+{% endfor -%}
+lint: |
+{% for command in fule_molecule_lint %}
+  {{ command }}
+{% endfor %}

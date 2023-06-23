@@ -1,0 +1,38 @@
+---
+# Check the content of the main tasks file.
+- name: Update tasks | Check file content of /tasks/main.yml
+  ansible.builtin.slurp:
+    src: "/tmp/dbv.testrole/tasks/main.yml"
+  register: __content_tasks_main_yml
+
+# Set the variable based on if there are more than two lines in the main.yml
+# file.
+# This will be used to enforce the replacement of the original file with the
+# template.
+- name: Update tasks | Set main replacement variable.
+  ansible.builtin.set_fact:
+    __fule_replace_tasks_main: >-
+      {% if (__content_tasks_main_yml.content | b64decode).splitlines() | length <= 2 -%}
+        true
+      {%- else -%}
+        false
+      {%- endif -%}
+
+- name: Update tasks | Deploy files in ./tasks subdirectory.
+  ansible.builtin.template:
+    dest: "/tmp/dbv.testrole/{{ task_file['dest'] }}"
+    src: "{{ task_file['src'] }}"
+    force: "{{ task_file['force'] | default(false) }}"
+    mode: '0644'
+  loop_control:
+    loop_var: task_file
+  loop:
+    - dest: "tasks/config.yml"
+      src: "tasks/config.yml.j2"
+    - dest: "tasks/install.yml"
+      src: "tasks/install.yml.j2"
+    - dest: "tasks/service.yml"
+      src: "tasks/service.yml.j2"
+    - dest: "tasks/main.yml"
+      src: "tasks/main.yml.j2"
+      force: "{{ __fule_replace_tasks_main | bool }}"

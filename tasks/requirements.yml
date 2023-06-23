@@ -1,0 +1,27 @@
+---
+- name: Requirements | Check that required role variables are set.
+  ansible.builtin.assert:
+    that:
+      - fule_working_dir | length > 0
+      - fule_role_name | length > 0
+    quiet: true
+    fail_msg: "Required variable not defined. Required: fule_working_dir, fule_role_name"
+
+- name: Requirements | Verify that the working dir is usable.
+  ansible.builtin.stat:
+    path: "{{ fule_working_dir }}"
+  register: __working_dir_stat
+  failed_when:
+    - not __working_dir_stat.stat.exists
+    - not __working_dir_stat.stat.executable
+    - not __working_dir_stat.stat.isdir
+    - not __working_dir_stat.stat.readable
+    - not __working_dir_stat.stat.writeable
+
+- name: Requirements | Verify the role name is syntactially correct.
+  ansible.builtin.assert:
+    that:
+      # yamllint disable-line rule:line-length
+      - "{{ fule_role_name | regex_search('^[a-z]+[a-z0-9]?\\.[a-z]+[a-z0-9_]?$', ignorecase=True) is not none }}"
+    quiet: true
+    fail_msg: "Required role name does not match namespace.role_name format."

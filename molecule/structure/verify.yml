@@ -1,0 +1,49 @@
+---
+# Ansible playbook for verification.
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Verify | Load the roles default variables.
+      ansible.builtin.include_vars:
+        file: ../../defaults/main.yml
+
+    - name: Verify | Assert that some line in task files exist.
+      ansible.builtin.lineinfile:
+        name: "{{ item.path }}"
+        line: "{{ item.line }}"
+        state: "{{ item.state | default(omit) }}"
+      register: __verify_file_content
+      failed_when:
+        - __verify_file_content.changed
+      loop:
+        - path: /tmp/dbv.testrole/tasks/main.yml
+          line: '  ansible.builtin.include_tasks: "./install.yml"'
+        - path: /tmp/dbv.testrole/tasks/main.yml
+          line: '  ansible.builtin.include_tasks: "./config.yml"'
+        - path: /tmp/dbv.testrole/tasks/main.yml
+          line: '  ansible.builtin.include_tasks: "./service.yml"'
+
+    - name: Verify | Assert all deployed files exist.
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        state: "{{ item.state }}"
+        owner: "{{ item.owner | default(omit) }}"
+        group: "{{ item.group | default(omit) }}"
+        mode: "{{ item.mode | default(omit) }}"
+      register: __verify_file_state
+      # check_mode: true
+      failed_when: __verify_file_state.changed
+      loop:
+        - path: /tmp/dbv.testrole/tasks/install.yml
+          state: file
+        - path: /tmp/dbv.testrole/tasks/config.yml
+          state: file
+        - path: /tmp/dbv.testrole/tasks/service.yml
+          state: file
+
+    - name: Verify | Assert the .travis.yml file has been removed.
+      ansible.builtin.stat:
+        path: "/tmp/dbv.testrole/.travis.yml"
+      register: __verify_travis_absent
+      failed_when: __verify_travis_absent.stat.exists

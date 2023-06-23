@@ -1,0 +1,260 @@
+---
+# defaults file for fule
+
+# Directory in which to create the Ansible role with
+# molecule.
+#
+# Example:
+#   fule_working_dir: /ansible/roles
+# doca tags:role
+fule_working_dir: ""
+# doca tag:role
+
+# Name of the Ansible role in the format
+# namespace.rolename.
+#
+# Example:
+#  fule_rolename: dbv.fule
+# doca tag:role
+fule_role_name: ""
+
+# List of platforms and configuration used in molecule.yml to define the
+# platforms to test on.
+#
+# Example:
+#   fule_molecule_platforms:
+#     - name: CentOS
+#       release: 8
+#       image: "quay.io/centos/centos:stream8"
+#       specs:
+#         pre_build_image: true
+#
+# doca tag:molecule
+fule_molecule_platforms:
+  - name: CentOS
+    release: 8
+    image: "quay.io/centos/centos:stream8"
+    specs:
+      pre_build_image: true
+
+# Default license for the role.
+#
+# Example:
+#   fule_role_license: MIT
+# doca tag:role
+fule_role_license: "MIT"
+
+# Minimum ansible version required to run the role.
+#
+# Example:
+#   fule_role_minimum_ansible_version: "2.1"
+# doca tag:other
+fule_role_minimum_ansible_version: "2.1"
+
+# Default author for the role
+#
+# Example:
+#   fule_role_author: John Doe
+# doca tag:role
+fule_role_author: John Doe
+
+# Default role company.
+#
+# Example:
+#   fule_role_company: "Acme Cooperation"
+# doca tag:role
+fule_role_company: ""
+
+# Molecule scenarios to create.
+#
+# The default scenario is always being created, even when not defined.
+#
+# Existing scenarios which are not defined will not be removed automatically.
+# Remove the scenario manually with `rm -r molecule/<scenario>`.
+#
+# Example:
+#   fule_molecule_scenarios:
+#     - test2
+# doca tag:molecule
+fule_molecule_scenarios: []
+
+# Default provisioner for containers.
+#
+# Example:
+#   fule_molecule_provisioner_name: "ansible"
+# doca tag:molecule
+fule_molecule_provisioner_name: "ansible"
+
+# List of steps for the testing when not the default steps shall be
+# taken.
+# Defining a list here, will overwrite the default list in the molecule.yml
+# file.
+#
+# Example:
+#  fule_molecule_scenario_test_sequence:
+#    - lint
+#    - destroy
+#    - created
+#    - verify
+#    - destroy
+#
+# doca tag:molecule
+fule_molecule_scenario_test_sequence: []
+
+# Default linting sequence. Defined as a list.
+#
+# Example:
+#   fule_molecule_lint:
+#     - "set -e"
+#     - "yamllint ."
+#     - "ansible-lint ."
+#
+# doca tag:molecule
+fule_molecule_lint:
+  - "set -e"
+  - "yamllint ."
+  - "ansible-lint ."
+
+# Checksum to identify the default README.md file from
+# the ansible-galaxy init command.
+#
+# The checksum is calculated using sha1.
+#
+# Example:
+#   fule_readme_checksum: "foobar"
+#
+# doca tag:other
+fule_readme_checksum: "60b47d58022aa1f64f201ca9132997bd917e84ed"
+
+# Checksum to identify the default .travis.yml file from the ansible-galaxy
+# init command.
+#
+# The checksum is calculated using sha1.
+#
+# Example:
+#   fule_travis_checksum: "foobar"
+#
+# doca tag:other
+fule_travis_checksum:
+  - "8158e0dd06a0b3a980212d790909d9c2cf5eb95c"  # .travis.yml (from init)
+  - "2683341f97ab39a5cd7326819d5ecf81c814ad85"  # .travis.yml.j2 (from role)
+
+# If set to true, the default README.md will be replace with a template file.
+#
+# If that file has been modified, the README.md will not be replaced.
+#
+# Example:
+#   fule_update_default_readme_file: true
+#
+# doca tag:role
+fule_update_default_readme_file: false
+
+# If set to true, the role structure will be altered the following way:
+#
+# - The file `/tasks/main.yml` will be replaced.
+# - The file `/tasks/install.yml` will be deployed.
+# - The file `/tasks/config.yml` will be deployed.
+# - The file `/tasks/service.yml` will be deployed.
+#
+# Example:
+#   fule_modify_role_structure: true
+#
+# doca tag:role
+fule_modify_role_structure: false
+
+# If set to true, the file `/meta/main.yml` will be updated information about
+#
+# - platforms
+# - namespace
+# - Role name
+# - Author
+# - License
+#
+# Example:
+#   fule_replace_meta_file: true
+#
+# doca tag:role
+fule_replace_meta_file: false
+
+# Path to the template used to replace the README.md
+# when `fule_update_default_readme_file: true`.
+#
+# Per default this points to the readme.md.j2 template in the template folder
+# or this role.
+#
+# Example:
+#   fule_readme_template: './templates/readme.md.j2'
+#
+# doca tag:other
+fule_readme_template: './templates/readme.md.j2'
+
+# Dict with the assignment for Linux distributions and their nicknames.
+# Ansible galaxy does not accept the release number for e.g. ubuntu
+# releases. This variables creates the assignment between the release
+# version number and the nickames expected by ansible galaxy.
+#
+# Example:
+#   fule_platform_nicknames:
+#     ubuntu:
+#       '18.04': "Bionic"
+#
+# doca tag:other
+fule_platform_releases:
+  ubuntu:
+    '18.04': 'Bionic'
+    '20.04': 'Focal'
+    '22.04': 'Jammy'
+    '22.10': 'Kinetic'
+    '23.04': 'Lunar'
+
+# Dict with the assignment for Linux distributions and their names
+# with Ansible Galaxy.
+#
+# Example:
+#   fule_platform_names:
+#     "centos": "EL"
+#
+# doca tag:other
+fule_platform_names:
+  "centos": "EL"
+
+# If set to `true`, the file `.travis` in the root directory will be updated
+# to pass the linting tests.
+#
+# If the file has been altered in any way, it will not be touched.
+#
+# Example:
+#   file_update_default_travis_file: true
+#
+# doca tag:role
+fule_update_default_travis_file: true
+
+# If set to `true`, the file `.travis` in the root directory of the role will
+# be removed as longs as it's the default file.
+#
+# If the file has been changed, it will not be removed.
+#
+# Example:
+#   fule_remove_default_travis_file: true
+#
+# doca tag:role
+fule_remove_default_travis_file: false
+
+# If set to `true` a basic yamllint configuration file will be crated in the
+# root directory of the role.
+#
+# Existing files will not be touched.
+#
+# Example:
+#   fule_manage_yamllint_configuration_file: true
+#
+# doca tag:role
+fule_manage_yamllint_configuration_file: false
+
+# Sets the name of the yamllint configuration file.
+#
+# Example:
+#   fule_yamllint_configuration_file: ".yamllint.yml"
+#
+# doca tag:role
+fule_yamllint_configuration_file: ".yamllint.yml"

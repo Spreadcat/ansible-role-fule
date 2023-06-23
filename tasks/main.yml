@@ -1,0 +1,13 @@
+---
+- name: Main | Include assertion file.
+  ansible.builtin.include_tasks:
+    file: 'requirements.yml'
+
+# tasks files
+- name: Main | Include install tasks
+  ansible.builtin.include_tasks: install.yml
+- name: Main | Include config tasks
+  ansible.builtin.include_tasks: config.yml
+- name: Main | Include service tasks
+  ansible.builtin.include_tasks: service.yml
+...

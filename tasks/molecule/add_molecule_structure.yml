@@ -1,0 +1,37 @@
+---
+
+- name: Config_add_molecule | Create molecule base directory.
+  ansible.builtin.file:
+    path: "{{ __fule_role_path }}/molecule"
+    state: directory
+    mode: '0755'
+
+- name: Config_add_molecule | Status of the example variable file.
+  ansible.builtin.stat:
+    path: '{{ __fule_role_path }}/molecule/fule_variables.yml'
+  register: __fule_stat_variables
+
+- name: Config_add_molecule | Deploy Example variable file for fule.
+  ansible.builtin.template:
+    dest: "{{ __fule_role_path }}/molecule/fule_variables.yml"
+    src: "molecule/fule_variables.yml"
+    mode: '0644'
+  when: not __fule_stat_variables.stat.exists
+
+- name: Config_add_molecule | Load fule custom variables.
+  ansible.builtin.include_vars:
+    file: "{{ __fule_role_path }}/molecule/fule_variables.yml"
+  when: __fule_stat_variables.stat.exists
+
+- name: Config_add_molecule | Update molecule scenarios list.
+  ansible.builtin.set_fact:
+    __fule_molecule_scenarios: |
+      {% set _ = fule_molecule_scenarios.append('default') -%}
+      {{ fule_molecule_scenarios }}
+
+- name: Config_add_molecule | Create molecule scenarios.
+  ansible.builtin.include_tasks:
+    file: ./molecule/create_scenario.yml
+  loop: "{{ __fule_molecule_scenarios }}"
+  loop_control:
+    loop_var: __fule_current_scenario_name

@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+
+    - name: "Molecule | Include role {{ fule_role_name }}"
+      ansible.builtin.include_role:
+        name: "{{ fule_role_name }}"

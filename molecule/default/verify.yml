@@ -1,0 +1,43 @@
+---
+# Ansible playbook for verification.
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Verify | Load the roles default variables.
+      ansible.builtin.include_vars:
+        file: ../../defaults/main.yml
+
+    - name: Verify | Assert the required directories exist.
+      ansible.builtin.file:
+        state: directory
+        path: "{{ dir }}"
+        mode: '0755'
+      loop:
+        - /tmp/dbv.testrole
+        - /tmp/dbv.testrole/molecule
+        - /tmp/dbv.testrole/molecule/default
+        - /tmp/dbv.testrole/meta
+        - /tmp/dbv.testrole/tasks
+        - /tmp/dbv.testrole/templates
+        - /tmp/dbv.testrole/files
+        - /tmp/dbv.testrole/defaults
+        - /tmp/dbv.testrole/vars
+      loop_control:
+        loop_var: dir
+      register: __dirs
+      check_mode: true
+      failed_when: >
+        __dirs is changed or
+        __dirs is failed
+
+    - name: Verify | Assert no files have been additionally deployed.
+      ansible.builtin.stat:
+        path: "{{ item.path }}"
+      loop:
+        - path: /tmp/dbv.testrole/tasks/install.yml
+        - path: /tmp/dbv.testrole/tasks/config.yml
+        - path: /tmp/dbv.testrole/tasks/service.yml
+      check_mode: true
+      register: __fule_verify_no_files
+      failed_when: __fule_verify_no_files.changed

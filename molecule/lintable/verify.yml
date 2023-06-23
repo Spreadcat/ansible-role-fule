@@ -1,0 +1,25 @@
+---
+# Ansible playbook for verification.
+- name: Verify
+  hosts: all
+  gather_facts: true
+  tasks:
+
+    - name: Verify | Run yamllint on the role.
+      ansible.builtin.command:
+        cmd: "/usr/local/bin/yamllint ."
+        chdir: /tmp/dbv.testrole
+      changed_when: __fule_yamllint.rc != 0
+      register: __fule_yamllint
+
+    - name: Verify | Run Ansible-lint on the role.
+      ansible.builtin.command:
+        cmd: /usr/local/bin/ansible-lint .
+        chdir: /tmp/dbv.testrole
+      register: __fule_ansiblelint
+      changed_when: __fule_ansiblelint.rc != 0
+      when:
+        - (ansible_distribution != 'Ubuntu'
+          or (ansible_distribution == 'Ubuntu'
+            and ansible_distribution_version != '20.04')
+          )
