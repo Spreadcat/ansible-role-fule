@@ -3,9 +3,9 @@
   hosts: all
   tasks:
 
-    - name: "Converge | Include variable file"
+    - name: "Molecule structure | Include variable file"
       ansible.builtin.include_vars: variables.yml
 
-    - name: "Converge | Include dbv.folecule"
+    - name: "Molecule structure | Include dbv.folecule"
       ansible.builtin.include_role:
         name: "dbv.folecule"

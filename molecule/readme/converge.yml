@@ -3,9 +3,9 @@
   hosts: all
   tasks:
 
-    - name: "Include variable file"
+    - name: "Molecule readme | Include variable file"
       ansible.builtin.include_vars: variables.yml
 
-    - name: "Include dbv.folecule"
+    - name: "Molecule readme | Include dbv.folecule"
       ansible.builtin.include_role:
         name: "dbv.folecule"

@@ -15,16 +15,16 @@
         state: present
       check_mode: true
       loop:
-        - '  author: Ola Nordmann'
+        - '  author: "Ola Nordmann"'
         - '  namespace: dbv'
         - '  company: ""'
         - '  role_name: testrole'
         - '  license: "MIT"'
         - '  min_ansible_version: "2.1"'
-        - '    - name: Fedora'
+        - '    - name: "Fedora"'
         - '      versions:'
         - '        - "37"'
-        - '    - name: Ubuntu'
+        - '    - name: "Ubuntu"'
         - '      versions:'
         - '        - "jammy"'
       loop_control:
