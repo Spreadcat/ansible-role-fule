@@ -47,7 +47,7 @@ galaxy_info:
 {%   if platform | lower in fule_platform_names %}
     - name: "{{ fule_platform_names[platform | lower] }}"
 {%   else %}
-    - name: "{{ platform }}"
+    - name: "{{ platform | capitalize }}"
 {%   endif %}
       versions:
 {%   for release in releases -%}
