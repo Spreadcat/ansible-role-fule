@@ -59,7 +59,3 @@ scenario:
 {% for sequence_step in __fule_molecule_sequence %}
     - {{ sequence_step }}
 {% endfor -%}
-lint: |
-{% for command in fule_molecule_lint %}
-  {{ command }}
-{% endfor %}

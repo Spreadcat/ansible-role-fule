@@ -28,7 +28,8 @@ The role will create the molecule configuration required and can in addition:
 fule_manage_yamllint_configuration_file: bool
 ```
 
-* If set to `true` a basic yamllint configuration file will be crated in the root directory of the role.
+* If set to `true` a basic yamllint configuration file will be created in the
+  root directory of the role.
 
 ```yaml
 fule_modify_role_structure: bool
@@ -97,12 +98,6 @@ fule_yamllint_configuration_file: str
 * Sets the name of the yamllint configuration file.
 
 ## Molecule variables
-
-```yaml
-fule_molecule_lint: list
-```
-
-* Default linting sequence. Defined as a list.
 
 ```yaml
 fule_molecule_platforms: list
@@ -392,6 +387,7 @@ Including an example of how to use your role (for instance, with variables passe
 ## Limitations
 
 * Ubuntu 20.04 is only partially supported. Out of the box Python 3.9 is required to run ansible-lint in the current version which would required to install it in the test container. Creating the structure works fine so far, just the linting test for that platform is being skipped.
+* Lintin has been removed from molecule. This role therefore removes support from it from molecule as well.
 
 ## License
 

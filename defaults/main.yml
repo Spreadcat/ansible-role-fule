@@ -92,7 +92,6 @@ fule_molecule_provisioner_name: "ansible"
 #
 # Example:
 #  fule_molecule_scenario_test_sequence:
-#    - lint
 #    - destroy
 #    - created
 #    - verify
@@ -100,20 +99,6 @@ fule_molecule_provisioner_name: "ansible"
 #
 # doca tag:molecule
 fule_molecule_scenario_test_sequence: []
-
-# Default linting sequence. Defined as a list.
-#
-# Example:
-#   fule_molecule_lint:
-#     - "set -e"
-#     - "yamllint ."
-#     - "ansible-lint ."
-#
-# doca tag:molecule
-fule_molecule_lint:
-  - "set -e"
-  - "yamllint ."
-  - "ansible-lint ."
 
 # Checksum to identify the default README.md file from
 # the ansible-galaxy init command.

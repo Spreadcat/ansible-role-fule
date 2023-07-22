@@ -5,10 +5,9 @@
 #
 # Example:
 #  fule_molecule_default_test_sequence:
-#    - lint
 #    - destroy
+#    - syntax
 fule_molecule_default_test_sequence:
-  - lint
   - destroy
   - syntax
   - create
