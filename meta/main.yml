@@ -1,10 +1,10 @@
 ---
 galaxy_info:
   author: Daniel Buøy-Vehn
-  namespace: dbv
-  description: your role description
+  namespace: spreadcat
+  description: Role to manage molecule scenarios and basic role setup like travis.yml, readme.md, changelog.md and fixing initial linting issues.
   company: ""
-  role_name: folecule
+  role_name: fule
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.0] - 2023-07-28
 
+## Changed
+
+- Updated `meta/main.yml` with corrected namespace, description and role name.
+
+## [2.1.0] - 2023-07-28
+
 ### Added
 
 - Changelog file for this project.
