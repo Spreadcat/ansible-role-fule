@@ -38,6 +38,7 @@
         - path: /tmp/dbv.testrole/tasks/install.yml
         - path: /tmp/dbv.testrole/tasks/config.yml
         - path: /tmp/dbv.testrole/tasks/service.yml
+        - path: /tmp/dbv.testrole/CHANGELOG.md
       check_mode: true
       register: __fule_verify_no_files
       failed_when: __fule_verify_no_files.changed

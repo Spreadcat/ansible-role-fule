@@ -1,0 +1,15 @@
+---
+# Ansible playbook for verification.
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Verify | Load the roles default variables.
+      ansible.builtin.include_vars:
+        file: ../../defaults/main.yml
+
+    - name: Verify | Check that the changelog file has been deployed.
+      ansible.builtin.stat:
+        path: "/tmp/dbv.testrole/CHANGELOG.md"
+      register: _fule_changelog_file
+      failed_when: not _fule_changelog_file.stat.exists

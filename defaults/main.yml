@@ -243,3 +243,20 @@ fule_manage_yamllint_configuration_file: false
 #
 # doca tag:role
 fule_yamllint_configuration_file: ".yamllint.yml"
+
+# If set to true a template for a changelog file will be deployed when missing.
+# Existing files will not be overwritten.
+#
+# Example:
+#   fule_manage_changelog_file: true
+#
+# doca tag:role
+fule_manage_changelog_file: false
+
+# Sets the name of the changelog file.
+#
+# Example:
+#   fule_changelog_file: "CHANGELOG.md"
+#
+# doca tag:other
+fule_changelog_file: "CHANGELOG.md"

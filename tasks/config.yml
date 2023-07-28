@@ -46,3 +46,8 @@
   ansible.builtin.include_tasks:
     file: ./role/manage_yamllint.yml
   when: fule_manage_yamllint_configuration_file
+
+- name: Config | Handle the changelog file.
+  ansible.builtin.include_tasks:
+    file: ./role/manage_changelog.yml
+  when: fule_manage_changelog_file

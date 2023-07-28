@@ -7,6 +7,7 @@ The role will create the molecule configuration required and can in addition:
 
 * Update the file `meta/main.yml`
 * Add a basic `.yamllint.yml` file
+* Add a template for a Changelog file.
 * Add more scenarios to the molecule configuration.
 * Update the `README.md` file.
 * Remove or update the `.travis.yml` file.
@@ -25,10 +26,17 @@ The role will create the molecule configuration required and can in addition:
 ## Role Variables
 
 ```yaml
+fule_manage_changelog_file: bool
+```
+
+* If set to true a template for a changelog file will be deployed when missing.
+  Existing files will not be overwritten.
+
+```yaml
 fule_manage_yamllint_configuration_file: bool
 ```
 
-* If set to `true` a basic yamllint configuration file will be created in the
+* If set to `true` a basic yamllint configuration file will be crated in the
   root directory of the role.
 
 ```yaml
@@ -41,7 +49,8 @@ fule_modify_role_structure: bool
 fule_remove_default_travis_file: bool
 ```
 
-* If set to `true`, the file `.travis` in the root directory of the role will be removed as longs as it's the default file.
+* If set to `true`, the file `.travis` in the root directory of the role will be
+  removed as longs as it's the default file.
 
 ```yaml
 fule_replace_meta_file: bool
@@ -83,13 +92,15 @@ fule_update_default_readme_file: bool
 fule_update_default_travis_file: bool
 ```
 
-* If set to `true`, the file `.travis` in the root directory will be updated to pass the linting tests.
+* If set to `true`, the file `.travis` in the root directory will be updated to
+  pass the linting tests.
 
 ```yaml
 fule_working_dir: str
 ```
 
-* defaults file for fule Directory in which to create the Ansible role with molecule.
+* defaults file for fule Directory in which to create the Ansible role with
+  molecule.
 
 ```yaml
 fule_yamllint_configuration_file: str
@@ -97,57 +108,43 @@ fule_yamllint_configuration_file: str
 
 * Sets the name of the yamllint configuration file.
 
-## Molecule variables
-
-```yaml
-fule_molecule_platforms: list
-```
-
-* List of platforms and configuration used in molecule.yml to define the platforms to test on.
-
-```yaml
-fule_molecule_provisioner_name: str
-```
-
-* Default provisioner for containers.
-
-```yaml
-fule_molecule_scenario_test_sequence: list
-```
-
-* List of steps for the testing when not the default steps shall be taken. Defining a list here, will overwrite the default list in the molecule.yml file.
-
-```yaml
-fule_molecule_scenarios: list
-```
-
-* Molecule scenarios to create.
-
 ## Other variables
+
+```yaml
+fule_changelog_file: str
+```
+
+* Sets the name of the changelog file.
 
 ```yaml
 fule_platform_names: dict
 ```
 
-* Dict with the assignment for Linux distributions and their names with Ansible Galaxy.
+* Dict with the assignment for Linux distributions and their names with Ansible
+  Galaxy.
 
 ```yaml
 fule_platform_releases: dict
 ```
 
-* Dict with the assignment for Linux distributions and their nicknames. Ansible galaxy does not accept the release number for e.g. Ubuntu releases. This variables creates the assignment between the release version number and the nicknames expected by Ansible galaxy.
+* Dict with the assignment for Linux distributions and their nicknames. Ansible
+  galaxy does not accept the release number for e.g. Ubuntu releases. This
+  variables creates the assignment between the release version number and the
+  nicknames expected by Ansible galaxy.
 
 ```yaml
 fule_readme_checksum: str
 ```
 
-* Checksum to identify the default README.md file from the ansible-galaxy init command.
+* Checksum to identify the default README.md file from the ansible-galaxy init
+  command.
 
 ```yaml
 fule_readme_template: str
 ```
 
-* Path to the template used to replace the README.md when `fule_update_default_readme_file: true`.
+* Path to the template used to replace the README.md when
+  `fule_update_default_readme_file: true`.
 
 ```yaml
 fule_role_minimum_ansible_version: str
@@ -159,7 +156,8 @@ fule_role_minimum_ansible_version: str
 fule_travis_checksum: list
 ```
 
-* Checksum to identify the default .travis.yml file from the ansible-galaxy init command.
+* Checksum to identify the default .travis.yml file from the ansible-galaxy init
+  command.
 
 ## Dependencies
 
@@ -278,7 +276,7 @@ Existing `.travis.yml` files which have been modified, will neither be updated o
 The role can create a basic [yamllint][#yamllint] configuration file in the root directory.
 
 Since [yamllint][#yamllint] supports multiple variants of naming the file, the
-filename can be set by using `fule_yamllint_configuration_file: ".yamllint.yml"
+filename can be set by using `fule_yamllint_configuration_file: ".yamllint.yml"`
 (default).
 
 Set `fule_manage_yamllint_configuration_file: true` for creating a configuration
