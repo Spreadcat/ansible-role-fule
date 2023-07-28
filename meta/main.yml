@@ -2,7 +2,9 @@
 galaxy_info:
   author: Daniel Buøy-Vehn
   namespace: spreadcat
-  description: Role to manage molecule scenarios and basic role setup like travis.yml, readme.md, changelog.md and fixing initial linting issues.
+  description: |
+    Role to manage molecule scenarios and basic role setup like travis.yml,
+    readme.md, changelog.md and fixing initial linting issues.
   company: ""
   role_name: fule
 
