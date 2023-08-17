@@ -19,6 +19,7 @@ The role will create the molecule configuration required and can in addition:
 * Two variables must be provided:
    * `fule_role_name`
    * `fule_working_dir`
+* The role required `gathered_facts: true` to be executed.
 
 * Additionally the platforms that shall be used in molecule must be provided.
    * `fule_role_platforms: []`

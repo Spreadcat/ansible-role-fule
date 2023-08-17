@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed some minor linting issues.
 - Disabled galaxy dependency for molecule testing.
 
+### Added
+
+- Added information about the requirement of `gathered_facts` when running the role.
+
 ## [2.1.0] - 2023-07-28
 
 ### Changed
