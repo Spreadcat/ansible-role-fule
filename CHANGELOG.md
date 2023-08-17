@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fixed some minor linting issues.
 - Disabled galaxy dependency for molecule testing.
+- Renamed role from folecule to fule within molecule.
 
 ### Added
 

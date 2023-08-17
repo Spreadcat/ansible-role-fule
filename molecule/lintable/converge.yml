@@ -6,6 +6,6 @@
     - name: "Molecule lintable | Include variable file"
       ansible.builtin.include_vars: variables.yml
 
-    - name: "Molecule lintable | Include dbv.folecule"
+    - name: "Molecule lintable | Include spreadcat.fule"
       ansible.builtin.include_role:
-        name: "dbv.folecule"
+        name: "spreadcat.fule"

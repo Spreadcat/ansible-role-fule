@@ -347,7 +347,7 @@ This creates a working ansible role with molecule in the location of
 ansible \
   --inventory localhost, all \
   --connection local \
-  --module-name include_role --args name=dbv.folecule \
+  --module-name include_role --args name=spreadcat.fule \
   --extra-vars fule_working_dir=/tmp \
   --extra-vars fule_role_name=dbv.newrole \
   --extra-vars fule_replace_meta_file=true

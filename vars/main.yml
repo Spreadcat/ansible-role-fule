@@ -1,6 +1,6 @@
 ---
-# vars file for folecule
-# Default test squence used by molecule when no other
+# vars file for fule
+# Default test sequence used by molecule when no other
 # sequence has been specified.
 #
 # Example:
