@@ -15,15 +15,15 @@
   loop_control:
     loop_var: molecule_obj
   loop:
-    - template: molecule/molecule.yml.j2
+    - template: "{{ role_path }}/templates/molecule/molecule.yml.j2"
       file: molecule.yml
       force: true
-    - template: molecule/prepare.yml.j2
+    - template: "{{ role_path }}/templates/molecule/prepare.yml.j2"
       file: prepare.yml
       force: false
-    - template: molecule/verify.yml.j2
+    - template: "{{ role_path }}/templates/molecule/verify.yml.j2"
       file: verify.yml
       force: false
-    - template: molecule/converge.yml.j2
+    - template: "{{ role_path }}/templates/molecule/converge.yml.j2"
       file: converge.yml
       force: false

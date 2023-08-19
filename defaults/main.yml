@@ -171,7 +171,7 @@ fule_replace_meta_file: false
 #   fule_readme_template: './templates/readme.md.j2'
 #
 # doca tag:other
-fule_readme_template: './templates/readme.md.j2'
+fule_readme_template: "{{ role_path }}/templates/readme.md.j2"
 
 # Dict with the assignment for Linux distributions and their nicknames.
 # Ansible galaxy does not accept the release number for e.g. Ubuntu
