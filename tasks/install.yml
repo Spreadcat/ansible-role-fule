@@ -1,11 +1,11 @@
 ---
 # Install tasks for this roles
-- name: Install | Create the role with molecule.
+- name: Install | Create the role with molecule
   ansible.builtin.command:
     cmd: "ansible-galaxy role init --init-path {{ fule_working_dir }} {{ fule_role_name }}"
     chdir: "{{ fule_working_dir }}"
     creates: "{{ fule_working_dir }}/{{ fule_role_name }}"
 
-- name: Install | Set variable with role_path.
+- name: Install | Set variable with role_path
   ansible.builtin.set_fact:
     __fule_role_path: "{{ fule_working_dir }}/{{ fule_role_name }}"

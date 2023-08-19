@@ -1,36 +1,36 @@
 ---
 # In order to be able to respect the user configuration set in the created role
 # from the user, we need to fetch any existing variable file for fule and
-# integrate it into the current run.
+# integrate it into the current run
 # Every host creates a temporary host id which is used to tag and track the
 # imported variable file. Running on one host works without it, but at least
 # running in molecule already breaks it. Therefore: hostid!
 
-- name: Config_add_molecule | Create molecule base directory.
+- name: Config_add_molecule | Create molecule base directory
   ansible.builtin.file:
     path: "{{ __fule_role_path }}/molecule"
     state: directory
     mode: '0755'
 
-- name: Config_add_molecule | Status of the example variable file.
+- name: Config_add_molecule | Status of the example variable file
   ansible.builtin.stat:
     path: '{{ __fule_role_path }}/molecule/fule_variables.yml'
   register: __fule_stat_variables
 
-- name: Config_add_molecule | Generate uniq host id for current run.
+- name: Config_add_molecule | Generate uniq host id for current run
   ansible.builtin.set_fact:
     __fule_hostid: "{{ lookup('community.general.random_string', length=12, override_all=allowed_chars) }}"
   vars:
     allowed_chars: 'abcdefghijklmnopqrstuvwxyz'
 
-- name: Config_add_molecule | Deploy example variable file for fule.
+- name: Config_add_molecule | Deploy example variable file for fule
   ansible.builtin.template:
     dest: "{{ __fule_role_path }}/molecule/fule_variables.yml"
     src: "molecule/fule_variables.yml"
     mode: '0644'
   when: not __fule_stat_variables.stat.exists
 
-- name: Config_add_molecule | Fetch variable file from remote location.
+- name: Config_add_molecule | Fetch variable file from remote location
   ansible.builtin.fetch:
     src: "{{ __fule_role_path }}/molecule/fule_variables.yml"
     dest: "/tmp/fule_variables-{{ __fule_hostid }}.yml"
@@ -38,24 +38,24 @@
   changed_when: false
   when: __fule_stat_variables.stat.exists
 
-- name: Config_add_molecule | Load fule custom variables.
+- name: Config_add_molecule | Load fule custom variables
   ansible.builtin.include_vars:
     file: "/tmp/fule_variables-{{ __fule_hostid }}.yml"
   when: __fule_stat_variables.stat.exists
 
-- name: Cleanup local remote file.
+- name: Cleanup local remote file
   ansible.builtin.file:
     state: absent
     path: "/tmp/fule_variables-{{ __fule_hostid }}.yml"
   changed_when: false
 
-- name: Config_add_molecule | Update molecule scenarios list.
+- name: Config_add_molecule | Update molecule scenarios list
   ansible.builtin.set_fact:
     __fule_molecule_scenarios: |
       {% set _ = fule_molecule_scenarios.append('default') -%}
       {{ fule_molecule_scenarios }}
 
-- name: Config_add_molecule | Create molecule scenarios.
+- name: Config_add_molecule | Create molecule scenarios
   ansible.builtin.include_tasks:
     file: ./molecule/create_scenario.yml
   loop: "{{ __fule_molecule_scenarios }}"

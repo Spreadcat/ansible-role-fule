@@ -1,6 +1,5 @@
 ---
-# Config tasks for this role
-- name: Config | Build supported platform variable.
+- name: Config | Build supported platform variable
   ansible.builtin.set_fact:
     __fule_role_platforms: |
       {% set supported_platforms = {} -%}
@@ -13,41 +12,51 @@
       {% endfor -%}
       {{ supported_platforms }}
 
-- name: Config | Include add_molecule_structure tasks.
+- name: Config | Include add_molecule_structure tasks
   ansible.builtin.include_tasks:
     file: molecule/add_molecule_structure.yml
 
-- name: Config | Execute changes on role structure.
+- name: Config | Execute changes on role structure
   ansible.builtin.include_tasks:
     file: ./role/update_tasks.yml
   when: fule_modify_role_structure
 
-- name: Config | Update role meta information.
-  ansible.builtin.template:
-    dest: "{{ __fule_role_path }}/meta/main.yml"
-    src: "meta/main.yml.j2"
-    mode: '0655'
-  vars:
-    fule_role_meta_platforms: "{{ __fule_role_platforms }}"
+- name: Config | Update role meta information
   when: fule_replace_meta_file
+  block:
+    - name: Config | Ensure meta directory exists
+      ansible.builtin.file:
+        state: directory
+        path: "{{ __fule_role_path }}//meta"
+        owner: "{{ lookup('ansible.builtin.env', 'USER') }}"
+        group: "{{ lookup('ansible.builtin.env', 'USER') }}"
+        mode: '0755'
 
-- name: Config | Update README.md file.
+    - name: Config | Update role meta file
+      ansible.builtin.template:
+        dest: "{{ __fule_role_path }}/meta/main.yml"
+        src: "meta/main.yml.j2"
+        mode: '0655'
+      vars:
+        fule_role_meta_platforms: "{{ __fule_role_platforms }}"
+
+- name: Config | Update README.md file
   ansible.builtin.include_tasks:
     file: ./role/update_readme.md.yml
   when: fule_update_default_readme_file
 
-- name: Config | Handle the .travis.yml file.
+- name: Config | Handle the .travis.yml file
   ansible.builtin.include_tasks:
     file: ./role/manage_travis_file.yml
   when: fule_update_default_travis_file
     or fule_remove_default_travis_file
 
-- name: Config | Handle .yamllint.yml file.
+- name: Config | Handle .yamllint.yml file
   ansible.builtin.include_tasks:
     file: ./role/manage_yamllint.yml
   when: fule_manage_yamllint_configuration_file
 
-- name: Config | Handle the changelog file.
+- name: Config | Handle the changelog file
   ansible.builtin.include_tasks:
     file: ./role/manage_changelog.yml
   when: fule_manage_changelog_file
