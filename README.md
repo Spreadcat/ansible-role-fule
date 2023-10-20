@@ -1,4 +1,4 @@
-# Role dbv.fule
+# Role spreadcat.fule
 
 Ansible role to either create a new Ansible role with a new molecule setup, or
 add a molecule configuration to an existing role.
@@ -328,9 +328,9 @@ If you want a fully working example, please see the next example.
 ansible \
   --inventory localhost, all \
   --connection local \
-  --module-name include_role --args name=dbv.fule \
+  --module-name include_role --args name=spreadcat.fule \
   --extra-vars fule_working_dir=/tmp \
-  --extra-vars fule_role_name=dbv.newrole
+  --extra-vars fule_role_name=spreadcat.newrole
 ```
 
 ### Working Example
@@ -341,7 +341,7 @@ namespace, which then leads to molecule refusing to start up. Setting
 `fule_replace_meta_file: true` mitigates this issue.
 
 This creates a working ansible role with molecule in the location of
-`/tmp/dbv.newrole`.
+`/tmp/spreadcat.newrole`.
 
 ```bash
 ansible \
@@ -349,7 +349,7 @@ ansible \
   --connection local \
   --module-name include_role --args name=spreadcat.fule \
   --extra-vars fule_working_dir=/tmp \
-  --extra-vars fule_role_name=dbv.newrole \
+  --extra-vars fule_role_name=spreadcat.newrole \
   --extra-vars fule_replace_meta_file=true
 ```
 
@@ -357,8 +357,8 @@ After running this, molecule will list only one default scenario, but will be
 ready to start up.
 
 ```bash
-$ cd /tmp/dbv.newrole
-$ dbv.newrole: mc list
+$ cd /tmp/spreadcat.newrole
+$ spreadcat.newrole: mc list
 INFO     Running default > list
                 ╷             ╷                  ╷               ╷         ╷
   Instance Name │ Driver Name │ Provisioner Name │ Scenario Name │ Created │ Converged
@@ -377,10 +377,10 @@ Including an example of how to use your role (for instance, with variables passe
   gather_facts: true
   become: false
   vars:
-    fule_role_name: dbv.testrole
+    fule_role_name: spreadcat.testrole
     fule_working_dir: /data/ansible/roles
   roles:
-     - role: dbv.fule
+     - role: spreadcat.fule
 ```
 
 ## Limitations

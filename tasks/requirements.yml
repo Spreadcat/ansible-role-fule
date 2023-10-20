@@ -1,5 +1,5 @@
 ---
-- name: Requirements | Check that required role variables are set.
+- name: Requirements | Check that required role variables are set
   ansible.builtin.assert:
     that:
       - fule_working_dir | length > 0
@@ -7,7 +7,7 @@
     quiet: true
     fail_msg: "Required variable not defined. Required: fule_working_dir, fule_role_name"
 
-- name: Requirements | Verify that the working dir is usable.
+- name: Requirements | Verify that the working dir is usable
   ansible.builtin.stat:
     path: "{{ fule_working_dir }}"
   register: __working_dir_stat
@@ -18,7 +18,7 @@
     - not __working_dir_stat.stat.readable
     - not __working_dir_stat.stat.writeable
 
-- name: Requirements | Verify the role name is syntactially correct.
+- name: Requirements | Verify the role name is syntactially correct
   ansible.builtin.assert:
     that:
       # yamllint disable-line rule:line-length
