@@ -23,13 +23,22 @@
   when: fule_modify_role_structure
 
 - name: Config | Update role meta information.
-  ansible.builtin.template:
-    dest: "{{ __fule_role_path }}/meta/main.yml"
-    src: "meta/main.yml.j2"
-    mode: '0655'
-  vars:
-    fule_role_meta_platforms: "{{ __fule_role_platforms }}"
   when: fule_replace_meta_file
+  block:
+    - name: Config | Ensure meta directory exists
+      ansible.builtin.file:
+        state: directory
+        path: "{{ __fule_role_path }}//meta"
+        owner: "{{ lookup('ansible.builtin.env', 'USER') }}"
+        group: "{{ lookup('ansible.builtin.env', 'USER') }}"
+
+    - name: Config | Update role meta file
+      ansible.builtin.template:
+        dest: "{{ __fule_role_path }}/meta/main.yml"
+        src: "meta/main.yml.j2"
+        mode: '0655'
+      vars:
+        fule_role_meta_platforms: "{{ __fule_role_platforms }}"
 
 - name: Config | Update README.md file.
   ansible.builtin.include_tasks:
