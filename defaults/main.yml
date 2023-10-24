@@ -49,7 +49,7 @@ fule_role_license: "MIT"
 # Example:
 #   fule_role_minimum_ansible_version: "2.1"
 # doca tag:other
-fule_role_minimum_ansible_version: "2.1"
+fule_role_minimum_ansible_version: "2.9"
 
 # Default author for the role
 #
