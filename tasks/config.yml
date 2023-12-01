@@ -28,8 +28,8 @@
       ansible.builtin.file:
         state: directory
         path: "{{ __fule_role_path }}//meta"
-        owner: "{{ lookup('ansible.builtin.env', 'USER') }}"
-        group: "{{ lookup('ansible.builtin.env', 'USER') }}"
+        owner: "{{ fule_username }}"
+        group: "{{ fule_group }}"
         mode: '0755'
 
     - name: Config | Update role meta file

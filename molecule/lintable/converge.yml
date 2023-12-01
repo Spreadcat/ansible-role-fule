@@ -1,5 +1,5 @@
 ---
-- name: Converge
+- name: Lintable | Converge
   hosts: all
   tasks:
 

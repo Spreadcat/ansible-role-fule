@@ -260,3 +260,26 @@ fule_manage_changelog_file: false
 #
 # doca tag:other
 fule_changelog_file: "CHANGELOG.md"
+
+# Sets the user who owns the role files.
+#
+# Defaults to the current user.
+#
+# Example:
+#   fule_username: "ola"
+fule_username: "{{ lookup('ansible.builtin.env', 'USER') }}"
+
+# Sets the group who owns the role files.
+#
+# Defaults to the current user name.
+#
+# Example:
+#   fule_group: "ola"
+fule_group: "{{ lookup('ansible.builtin.env', 'USER') }}"
+
+# Sets the default home path for the user who runs the script.
+# This used to reference the configuration files as well.
+#
+# Example:
+#   fule_userhome: /home/ola
+fule_userhome: "{{ lookup('ansible.builtin.env', 'HOME') }}"

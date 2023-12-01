@@ -1,5 +1,5 @@
 ---
-- name: Converge
+- name: Default | Converge
   hosts: all
   tasks:
 

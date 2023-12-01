@@ -1,6 +1,6 @@
 ---
 # Ansible playbook for verification.
-- name: Verify
+- name: Lintable | Verify
   hosts: all
   gather_facts: true
   tasks:

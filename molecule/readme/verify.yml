@@ -1,12 +1,16 @@
 ---
 # Ansible playbook for verification.
-- name: Verify
+- name: Readme | Verify
   hosts: all
   gather_facts: false
   tasks:
     - name: Verify | Load the roles default variables.
       ansible.builtin.include_vars:
         file: ../../defaults/main.yml
+
+    - name: Verify | Load the variables for the molecule scenario
+      ansible.builtin.include_vars:
+        file: variables.yml
 
     - name: Verify | Assert the README.md file has been replaced.
       ansible.builtin.stat:

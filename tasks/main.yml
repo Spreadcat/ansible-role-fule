@@ -12,11 +12,11 @@
     file: "{{ item }}"
   with_first_found:
     - files:
-        - "{{ lookup('ansible.builtin.env', 'HOME') }}/.ansible/fule.conf.yml"
-        - "{{ lookup('ansible.builtin.env', 'HOME') }}/.ansible/fule.cnf.yml"
-        - "{{ lookup('ansible.builtin.env', 'HOME') }}/.ansible/fule/variables.yml"
-        - "{{ lookup('ansible.builtin.env', 'HOME') }}/.ansible/fule.yml"
-        - "{{ lookup('ansible.builtin.env', 'HOME') }}/.ansible/fule.cnf"
+        - "{{ fule_userhome }}/.ansible/fule.conf.yml"
+        - "{{ fule_userhome }}/.ansible/fule.cnf.yml"
+        - "{{ fule_userhome }}/.ansible/fule/variables.yml"
+        - "{{ fule_userhome }}/.ansible/fule.yml"
+        - "{{ fule_userhome }}/.ansible/fule.cnf"
       skip: true
 
 - name: Main | Include install tasks

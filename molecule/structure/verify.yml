@@ -1,6 +1,6 @@
 ---
 # Ansible playbook for verification.
-- name: Verify
+- name: Structure | Verify
   hosts: all
   gather_facts: false
   tasks:

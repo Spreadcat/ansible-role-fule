@@ -1,5 +1,5 @@
 ---
-- name: Prepare the environment.
+- name: Meta | Prepare the environment
   hosts: all
   gather_facts: true
   tasks: []

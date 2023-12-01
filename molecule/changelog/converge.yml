@@ -1,5 +1,5 @@
 ---
-- name: Converge
+- name: Changelog | Converge
   hosts: all
   tasks:
 

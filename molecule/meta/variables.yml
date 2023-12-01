@@ -4,6 +4,10 @@
 fule_role_name: dbv.testrole
 fule_role_author: Ola Nordmann
 fule_working_dir: /tmp
+fule_username: ansible
+fule_group: ansible
+fule_userhome: /home/ansible
+fule_role_minimum_ansible_version: 2.1
 
 specs: &specs
   tmpfs: ['/run', '/tmp']
