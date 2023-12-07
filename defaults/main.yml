@@ -283,3 +283,27 @@ fule_group: "{{ lookup('ansible.builtin.env', 'USER') }}"
 # Example:
 #   fule_userhome: /home/ola
 fule_userhome: "{{ lookup('ansible.builtin.env', 'HOME') }}"
+
+# If set to true a file `cleanup.yml` will be created in a scenario and
+# integrated into the molecule scenario configuration.
+# Any existing file will not be overwritten.
+#
+# Example:
+#   fule_cleanup_file: true
+fule_molecule_scenario_cleanup_file: false
+
+# If set to true a file `side_effect.yml` will be create if missing in a scenario and
+# integrated into the molecule scenario configuration.
+# Any existing file will not be overwritten.
+#
+# Example:
+#   fule_molecule_scenario_sideeffect_file: true
+fule_molecule_scenario_sideeffect_file: false
+
+# If set to true a file `variables.yml` will be create (if missing) in a scenario and
+# integrated into the molecule playbooks that are being created as well.
+# Any existing file will not be overwritten.
+#
+# Example:
+#   fule_molecule_scenario_variables_files: true
+fule_molecule_scenario_variables_file: false

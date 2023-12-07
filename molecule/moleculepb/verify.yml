@@ -1,0 +1,39 @@
+---
+# Ansible playbook for verification.
+- name: Moleculepb | Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Verify | Load the roles default variables
+      ansible.builtin.include_vars:
+        file: ../../defaults/main.yml
+
+    - name: Verify | Assert all deployed files exist
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        state: "{{ item.state }}"
+        owner: "{{ item.owner | default(omit) }}"
+        group: "{{ item.group | default(omit) }}"
+        mode: "{{ item.mode | default(omit) }}"
+      register: __verify_file_state
+      check_mode: true
+      failed_when: __verify_file_state.changed
+      loop:
+        - path: /tmp/dbv.testrole/molecule/default/cleanup.yml
+          state: file
+        - path: /tmp/dbv.testrole/tasks/side_effect.yml
+          state: file
+        - path: /tmp/dbv.testrole/molecule/default/variables.yml
+          state: file
+
+    - name: Verify | Assert molecule.yml has been updated
+      ansible.builtin.lineinfile:
+        path: /tmp/dbv.testrole/molecule/default/molecule.yml
+        line: "{{ item }}"
+      register: __verify_config_exists
+      failed_when: __verify_config_exists.changed
+      check_mode: true
+      loop:
+        - "  playbooks:"
+        - "    cleanup: cleanup.yml"
+        - "    side_effect: side_effect.yml"

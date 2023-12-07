@@ -2,4 +2,9 @@
 - name: {{ __fule_current_scenario_name | capitalize }} | Verify
   hosts: all
   gather_facts: false
+{% if fule_molecule_scenario_variables_file %}
+  tasks:
+{{ __fule_molecule_include_vars }}
+{%- else %}
   tasks: []
+{%- endif %}
