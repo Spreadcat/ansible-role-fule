@@ -5,6 +5,39 @@
     state: directory
     mode: '0755'
 
+- name: Create_scenario | Deploy variables file
+  when: fule_molecule_scenario_variables_file
+  block:
+
+    # This variable content is used by all template files for module that are being deployed.
+    - name: Create scenario | Load template content for variables inclusion
+      ansible.builtin.set_fact:
+        # yamllint disable rule:line-length
+        __fule_molecule_include_vars: "{{ lookup('ansible.builtin.template', '{{ role_path }}/templates/molecule/include_variables.yml.j2') }}"
+
+    - name: Create_scenario | Deploy variables file
+      ansible.builtin.template:
+        src: "{{ role_path }}/templates/molecule/variables.yml.j2"
+        dest: "{{ __fule_role_path }}/molecule/{{ __fule_current_scenario_name }}/variables.yml"
+        mode: '0644'
+        force: false
+
+- name: Create_scenario | Deploy create file
+  when: fule_molecule_scenario_cleanup_file
+  ansible.builtin.template:
+    src: "{{ role_path }}/templates/molecule/cleanup.yml.j2"
+    dest: "{{ __fule_role_path }}/molecule/{{ __fule_current_scenario_name }}/cleanup.yml"
+    mode: '0644'
+    force: false
+
+- name: Create_scenario | Deploy side_effect file
+  when: fule_molecule_scenario_sideeffect_file
+  ansible.builtin.template:
+    src: "{{ role_path }}/templates/molecule/side_effect.yml.j2"
+    dest: "{{ __fule_role_path }}/molecule/{{ __fule_current_scenario_name }}/side_effect.yml"
+    mode: '0644'
+    force: false
+
 - name: Create_scenario | Deploy molecule scenario configuration files
   ansible.builtin.template:
     src: "{{ molecule_obj['template'] }}"

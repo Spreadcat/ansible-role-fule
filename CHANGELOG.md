@@ -5,6 +5,18 @@ All notable changes to spreadcat.fule will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.0] - 2023-12-08
+
+### Added
+
+- Variable `fule_molecule_scenario_cleanup_file`. This variable allows to create a cleanup file in every scenario.
+- Variable `fule_molecule_scenario_sideeffect_file`. This variable allows to create a `side_effect.yml` file in every
+    scenario.
+- Variable `fule_molecule_scenario_variables_file`. This variable allows to create a variable file that is automatically
+    included in every scenario.
+- Molecule test scenario `moleculepb` (molecule playbooks), that tests the role behavior regarding the newly added
+    variables.
+
 ## [2.4.0] - 2023-12-07
 
 ### Changed

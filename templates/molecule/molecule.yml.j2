@@ -5,7 +5,6 @@ dependency:
 driver:
   name: podman
 platforms:
-
 {% for platform in fule_molecule_platforms %}
   - name: {{ platform['name'] | lower }}{{ platform['release'] }}
     image: {{ platform['image'] }}
@@ -40,6 +39,15 @@ provisioner:
         {{ inv_var }}: {{ inv_value }}
 {%     endfor -%}
 {%   endfor -%}
+{% endif %}
+{% if fule_molecule_scenario_cleanup_file or fule_molecule_scenario_sideeffect_file %}
+  playbooks:
+{%   if fule_molecule_scenario_cleanup_file %}
+    cleanup: cleanup.yml
+{%   endif %}
+{%   if fule_molecule_scenario_sideeffect_file %}
+    side_effect: side_effect.yml
+{%   endif %}
 {% endif %}
   config_options:
     defaults:

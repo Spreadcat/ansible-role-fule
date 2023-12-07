@@ -1,0 +1,41 @@
+---
+# Variables for this scenario
+fule_role_name: dbv.testrole
+fule_role_author: Ola Nordmann
+fule_working_dir: /tmp
+fule_username: ansible
+fule_group: ansible
+
+specs: &specs
+  tmpfs: ['/run', '/tmp']
+  volumes: ['/sys/fs/cgroup:/sys/fs/cgroup:ro']
+  capabilities: ['SYS_ADMIN']
+  command: '/lib/systemd/systemd'
+  pre_build_image: true
+
+fule_molecule_platforms:
+  - name: Fedora
+    release: 37
+    image: localhost/fedora37-ansible-nonroot
+    provisioner:
+      hostvars:
+        ansible_user: ansible
+    specs:
+      <<: *specs
+  - name: Ubuntu
+    release: 22.04
+    image: localhost/ubuntu2204-ansible-nonroot
+    provisioner:
+      hostvars:
+        ansible_user: ansible
+    specs:
+      <<: *specs
+
+# Deploy and integrate a cleanup file
+fule_molecule_scenario_cleanup_file: true
+
+# Deploy and integrate a sideeffect file
+fule_molecule_scenario_sideeffect_file: true
+
+# Deploy and integrate a variables.yml file
+fule_molecule_scenario_variables_file: true

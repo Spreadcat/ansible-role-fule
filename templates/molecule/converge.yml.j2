@@ -2,6 +2,10 @@
 - name: {{ __fule_current_scenario_name | capitalize }} | Converge
   hosts: all
   tasks:
+{% if fule_molecule_scenario_variables_file %}
+
+{{ __fule_molecule_include_vars }}
+{% endif %}
 
     - name: "Converge | Include role {{ fule_role_name }}"
       ansible.builtin.include_role:
