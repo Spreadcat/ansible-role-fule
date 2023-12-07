@@ -5,6 +5,13 @@ All notable changes to spreadcat.fule will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.0] - 2023-12-07
+
+### Changed
+
+- Adjusted the titles of all tasks: no pending points, the tasks in the module structure now reflect better where which
+    task is run in which scenario. Scenario names are automatically capitalized.
+
 ## [2.3.1] - 2023-12-01
 
 ### Fixed

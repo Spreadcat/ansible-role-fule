@@ -5,14 +5,14 @@
   gather_facts: true
   tasks:
 
-    - name: Verify | Run yamllint on the role.
+    - name: Verify | Run yamllint on the role
       ansible.builtin.command:
         cmd: "/usr/local/bin/yamllint ."
         chdir: /tmp/dbv.testrole
       changed_when: __fule_yamllint.rc != 0
       register: __fule_yamllint
 
-    - name: Verify | Run Ansible-lint on the role.
+    - name: Verify | Run Ansible-lint on the role
       ansible.builtin.command:
         cmd: /usr/local/bin/ansible-lint .
         chdir: /tmp/dbv.testrole

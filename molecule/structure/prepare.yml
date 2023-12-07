@@ -1,5 +1,5 @@
 ---
-- name: Structure | Prepare the environment
+- name: Structure | Prepare
   hosts: all
-  gather_facts: true
+  gather_facts: false
   tasks: []

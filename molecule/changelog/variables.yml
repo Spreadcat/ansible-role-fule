@@ -1,6 +1,5 @@
 ---
 # Variables for this scenario
-
 fule_role_name: dbv.testrole
 fule_role_author: Ola Nordmann
 fule_working_dir: /tmp

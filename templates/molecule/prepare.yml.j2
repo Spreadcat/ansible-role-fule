@@ -1,5 +1,5 @@
 ---
-- name: Prepare the environment.
+- name: {{ __fule_current_scenario_name | capitalize }} | Prepare
   hosts: all
-  gather_facts: true
+  gather_facts: false
   tasks: []

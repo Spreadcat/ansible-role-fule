@@ -9,7 +9,7 @@
 # file.
 # This will be used to enforce the replacement of the original file with the
 # template.
-- name: Update tasks | Set main replacement variable.
+- name: Update tasks | Set main replacement variable
   ansible.builtin.set_fact:
     __fule_replace_tasks_main: >-
       {% if (__content_tasks_main_yml.content | b64decode).splitlines() | length <= 2 -%}
@@ -18,7 +18,7 @@
         false
       {%- endif -%}
 
-- name: Update tasks | Deploy files in ./tasks subdirectory.
+- name: Update tasks | Deploy files in ./tasks subdirectory
   ansible.builtin.template:
     dest: "{{ __fule_role_path }}/{{ task_file['dest'] }}"
     src: "{{ task_file['src'] }}"

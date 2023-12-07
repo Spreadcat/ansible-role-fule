@@ -1,5 +1,5 @@
 ---
-- name: Meta | Prepare the environment
+- name: Meta | Prepare
   hosts: all
-  gather_facts: true
+  gather_facts: false
   tasks: []

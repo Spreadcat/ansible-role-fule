@@ -4,11 +4,11 @@
   hosts: all
   gather_facts: false
   tasks:
-    - name: Verify | Load the roles default variables.
+    - name: Verify | Load the roles default variables
       ansible.builtin.include_vars:
         file: ../../defaults/main.yml
 
-    - name: Verify | Assert that some line in task files exist.
+    - name: Verify | Assert that some line in task files exist
       ansible.builtin.lineinfile:
         name: "{{ item.path }}"
         line: "{{ item.line }}"
@@ -24,7 +24,7 @@
         - path: /tmp/dbv.testrole/tasks/main.yml
           line: '  ansible.builtin.include_tasks: "./service.yml"'
 
-    - name: Verify | Assert all deployed files exist.
+    - name: Verify | Assert all deployed files exist
       ansible.builtin.file:
         path: "{{ item.path }}"
         state: "{{ item.state }}"
@@ -42,7 +42,7 @@
         - path: /tmp/dbv.testrole/tasks/service.yml
           state: file
 
-    - name: Verify | Assert the .travis.yml file has been removed.
+    - name: Verify | Assert the .travis.yml file has been removed
       ansible.builtin.stat:
         path: "/tmp/dbv.testrole/.travis.yml"
       register: __verify_travis_absent

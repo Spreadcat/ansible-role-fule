@@ -1,11 +1,11 @@
 ---
 # Manage a yamllint configuration file.
-- name: Manage yamllint | Status yamllint configuration file.
+- name: Manage yamllint | Status yamllint configuration file
   ansible.builtin.stat:
     path: "{{ __fule_role_path }}/{{ fule_yamllint_configuration_file }}"
   register: __fule_yamllint_config_file
 
-- name: Manage yamllint | Deploy yamllint configuration file.
+- name: Manage yamllint | Deploy yamllint configuration file
   ansible.builtin.template:
     src: "yamllint.yml.j2"
     dest: "{{ __fule_role_path }}/{{ fule_yamllint_configuration_file }}"
