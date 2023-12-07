@@ -1,5 +1,5 @@
 ---
-- name: Default | Prepare the environment
+- name: Default | Prepare
   hosts: all
-  gather_facts: true
+  gather_facts: false
   tasks: []

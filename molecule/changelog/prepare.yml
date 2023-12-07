@@ -1,5 +1,5 @@
 ---
-- name: Changelog | Prepare the environment
+- name: Changelog | Prepare
   hosts: all
-  gather_facts: true
+  gather_facts: false
   tasks: []

@@ -4,11 +4,11 @@
   hosts: all
   gather_facts: false
   tasks:
-    - name: Verify | Load the roles default variables.
+    - name: Verify | Load the roles default variables
       ansible.builtin.include_vars:
         file: ../../defaults/main.yml
 
-    - name: Verify | Assert the meta file has been created correctly.
+    - name: Verify | Assert the meta file has been created correctly
       ansible.builtin.lineinfile:
         name: "/tmp/dbv.testrole/meta/main.yml"
         line: "{{ verify_line }}"

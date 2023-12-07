@@ -3,9 +3,9 @@
   hosts: all
   tasks:
 
-    - name: "Molecule lintable | Include variable file"
+    - name: "Converge | Include variable file"
       ansible.builtin.include_vars: variables.yml
 
-    - name: "Molecule lintable | Include spreadcat.fule"
+    - name: "Converge | Include spreadcat.fule"
       ansible.builtin.include_role:
         name: "spreadcat.fule"

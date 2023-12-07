@@ -1,17 +1,17 @@
 ---
-- name: Lintable | Prepare the environment
+- name: Lintable | Prepare
   hosts: all
   gather_facts: true
   tasks:
 
-    - name: Prepare | Install yamllint.
+    - name: Prepare | Install yamllint
       ansible.builtin.pip:
         name: "{{ item }}"
         state: present
       loop:
         - yamllint
 
-    - name: Prepare | Install ansible-lint.
+    - name: Prepare | Install ansible-lint
       when:
         - (ansible_distribution != 'Ubuntu'
           or (ansible_distribution == 'Ubuntu'

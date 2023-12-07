@@ -4,11 +4,11 @@
   hosts: all
   gather_facts: false
   tasks:
-    - name: Verify | Load the roles default variables.
+    - name: Verify | Load the roles default variables
       ansible.builtin.include_vars:
         file: ../../defaults/main.yml
 
-    - name: Verify | Assert the required directories exist.
+    - name: Verify | Assert the required directories exist
       ansible.builtin.file:
         state: directory
         path: "{{ dir }}"
@@ -31,7 +31,7 @@
         __dirs is changed or
         __dirs is failed
 
-    - name: Verify | Assert no files have been additionally deployed.
+    - name: Verify | Assert no files have been additionally deployed
       ansible.builtin.stat:
         path: "{{ item.path }}"
       loop:

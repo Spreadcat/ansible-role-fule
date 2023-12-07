@@ -1,10 +1,10 @@
 ---
-- name: Udpate_Readme | Stat of Readme.md file.
+- name: Udpate_Readme | Stat of Readme.md file
   ansible.builtin.stat:
     path: "{{ __fule_role_path }}/README.md"
   register: __fule_readme_md
 
-- name: Update_Readme | Manage default Readme file.
+- name: Update_Readme | Manage default Readme file
   ansible.builtin.template:
     dest: "{{ __fule_role_path }}/README.md"
     src: "{{ fule_readme_template }}"

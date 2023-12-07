@@ -1,8 +1,8 @@
 ---
-- name: Converge
+- name: {{ __fule_current_scenario_name | capitalize }} | Converge
   hosts: all
   tasks:
 
-    - name: "Molecule | Include role {{ fule_role_name }}"
+    - name: "Converge | Include role {{ fule_role_name }}"
       ansible.builtin.include_role:
         name: "{{ fule_role_name }}"

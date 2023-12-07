@@ -1,11 +1,11 @@
 ---
-- name: Create | Create molecule scenario directories
+- name: Create_scenario | Create molecule scenario directories
   ansible.builtin.file:
     path: "{{ __fule_role_path }}/molecule/{{ __fule_current_scenario_name }}"
     state: directory
     mode: '0755'
 
-- name: Create | Deploy molecule scenario configuration files
+- name: Create_scenario | Deploy molecule scenario configuration files
   ansible.builtin.template:
     src: "{{ molecule_obj['template'] }}"
     dest: "{{ __fule_role_path }}/molecule/{{ __fule_current_scenario_name }}/{{ molecule_obj.file }}"

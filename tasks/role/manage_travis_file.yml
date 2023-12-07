@@ -1,5 +1,5 @@
 ---
-- name: Manage travis | Gather information about the .travis.yml file.
+- name: Manage travis | Gather information about the .travis.yml file
   ansible.builtin.stat:
     path: "{{ __fule_role_path }}/.travis.yml"
   register: __fule_stat_travis_yml
@@ -11,7 +11,7 @@
     - __fule_stat_travis_yml.stat.checksum in fule_travis_checksum
   block:
 
-    - name: Manage travis | Update default .travis.yml file.
+    - name: Manage travis | Update default .travis.yml file
       ansible.builtin.template:
         dest: "{{ __fule_role_path }}/.travis.yml"
         src: travis.yml.j2
@@ -19,7 +19,7 @@
       when:
         - fule_update_default_travis_file
 
-    - name: Manage travis | Remove default .travis.yml file.
+    - name: Manage travis | Remove default .travis.yml file
       ansible.builtin.file:
         path: "{{ __fule_role_path }}/.travis.yml"
         state: absent

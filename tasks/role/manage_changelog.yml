@@ -1,12 +1,12 @@
 ---
 # Manage a Changelog file.
-- name: Manage changelog | Status changelog.md file.
+- name: Manage changelog | Status changelog.md file
   ansible.builtin.stat:
     path: "{{ __fule_role_path }}/{{ fule_changelog_file }}"
   register: _fule_changelog_file
   failed_when: false
 
-- name: Manage changelog | Deploy changelog.md file.
+- name: Manage changelog | Deploy changelog.md file
   ansible.builtin.template:
     src: changelog.md.j2
     dest: "{{ __fule_role_path }}/{{ fule_changelog_file }}"

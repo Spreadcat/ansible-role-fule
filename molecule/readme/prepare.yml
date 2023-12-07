@@ -1,5 +1,5 @@
 ---
-- name: Readme | Prepare the environment
+- name: Readme | Prepare
   hosts: all
-  gather_facts: true
+  gather_facts: false
   tasks: []
