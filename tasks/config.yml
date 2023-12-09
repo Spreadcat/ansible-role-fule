@@ -60,3 +60,8 @@
   ansible.builtin.include_tasks:
     file: ./role/manage_changelog.yml
   when: fule_manage_changelog_file
+
+- name: Config | Handle the gitlab-ci file
+  ansible.builtin.include_tasks:
+    file: ./role/manage_gitlabci.yml
+  when: fule_cicd_gitlab_file

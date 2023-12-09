@@ -307,3 +307,18 @@ fule_molecule_scenario_sideeffect_file: false
 # Example:
 #   fule_molecule_scenario_variables_files: true
 fule_molecule_scenario_variables_file: false
+
+# If set to true a file for the GitLab-CICD will be created (if missing).
+# The file will be mostly empty, but alternative file can be specified by setting
+# fule_cicd_gitlab_path: <filepath>
+#
+# Example:
+#   fule_cicd_gitlab_file: true
+fule_cicd_gitlab_file: false
+
+# If a file path has been specified, fule will use that file and deploy it as
+# .gitlab-ci.yml into the root directory of the role.
+#
+# Example:
+#   fule_cicd_gitlab_path: "/data/files/gitlab/cicd.yml"
+fule_cicd_gitlab_path: ""
