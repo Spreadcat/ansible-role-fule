@@ -1,0 +1,20 @@
+---
+# manage the gitlab-ci.yml file
+- name: Manage_gitlabci | Deploy the standard GitLab ci file
+  ansible.builtin.template:
+    src: gitlab-ci.yml.j2
+    dest: "{{ __fule_role_path }}/.gitlab-ci.yml"
+    owner: "{{ fule_username }}"
+    group: "{{ fule_group }}"
+    mode: '0644'
+  when: fule_cicd_gitlab_path == ""
+
+- name: Manage_gitlabci | Deploy custom GitLab ci file
+  ansible.builtin.copy:
+    src: "{{ fule_cicd_gitlab_path }}"
+    dest: "{{ __fule_role_path }}/.gitlab-ci.yml"
+    owner: "{{ fule_username }}"
+    group: "{{ fule_group }}"
+    mode: '0644'
+    remote_src: true
+  when: fule_cicd_gitlab_path != ""

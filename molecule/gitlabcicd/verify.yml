@@ -1,0 +1,17 @@
+---
+# Ansible playbook for verification.
+- name: Gitlabcicd | Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    #- name: Verify | Load the roles default variables
+    #  ansible.builtin.include_vars:
+    #    file: ../../defaults/main.yml
+
+    - name: Verify | Check that the deployed custom file exists
+      ansible.builtin.stat:
+        path: /tmp/dbv.testrole/.gitlab-ci.yml
+      register: __stat_gitlabci
+      failed_when:
+        - __stat_gitlabci.stat.checksum != '7fc6c135480e64e92c84e6927f112b35f93d84eb'
+        - not __stat_gitlabci.stat.exists
