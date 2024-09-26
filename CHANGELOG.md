@@ -5,6 +5,13 @@ All notable changes to spreadcat.fule will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.0] - 2024-09-26
+
+### Fixed
+
+The minimum ansible version within `meta/main.yml` is now set to 2.11 instead of 2.9. The version 2.11 was the first one
+supporting that file.
+
 ## [2.3.1] - 2023-12-01
 
 ### Fixed

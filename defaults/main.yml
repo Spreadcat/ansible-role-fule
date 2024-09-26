@@ -45,11 +45,13 @@ fule_molecule_platforms:
 fule_role_license: "MIT"
 
 # Minimum Ansible version required to run the role.
+# When using the meta/requirements.yml file version 2.11
+# is the minimum to use.
 #
 # Example:
 #   fule_role_minimum_ansible_version: "2.1"
 # doca tag:other
-fule_role_minimum_ansible_version: "2.9"
+fule_role_minimum_ansible_version: "2.11"
 
 # Default author for the role
 #
