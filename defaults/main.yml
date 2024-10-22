@@ -322,3 +322,11 @@ fule_cicd_gitlab_file: false
 # Example:
 #   fule_cicd_gitlab_path: "/data/files/gitlab/cicd.yml"
 fule_cicd_gitlab_path: ""
+
+# Sets the path to a role skeleton ansible-galaxy is using during the initialization
+# of the the role
+#
+# Example:
+#   fule_role_skeleton: "/etc/ansible/default_role"
+#
+fule_role_skeleton: ""

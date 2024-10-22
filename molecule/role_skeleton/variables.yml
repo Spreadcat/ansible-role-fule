@@ -1,0 +1,79 @@
+---
+# Variables for this scenario
+fule_role_name: dbv.testrole
+fule_role_author: Ola Nordmann
+fule_namespace: dbv
+fule_role_skeleton: "/etc/ansible/default_role"
+fule_working_dir: /tmp
+fule_username: ansible
+fule_group: ansible
+
+specs: &specs
+  tmpfs: ['/run', '/tmp']
+  volumes: ['/sys/fs/cgroup:/sys/fs/cgroup:ro']
+  capabilities: ['SYS_ADMIN']
+  command: '/lib/systemd/systemd'
+  pre_build_image: true
+
+fule_molecule_platforms:
+  - name: Fedora
+    release: 37
+    image: localhost/fedora37-ansible-nonroot
+    provisioner:
+      hostvars:
+        ansible_user: ansible
+    specs:
+      <<: *specs
+  - name: Ubuntu
+    release: 22.04
+    image: localhost/ubuntu2204-ansible-nonroot
+    provisioner:
+      hostvars:
+        ansible_user: ansible
+    specs:
+      <<: *specs
+
+_ansible_default_role_dirs:
+  - path: "/etc/ansible"
+  - path: "/etc/ansible/default_role"
+  - path: "/etc/ansible/default_role/tasks"
+  - path: "/etc/ansible/default_role/defaults"
+  - path: "/etc/ansible/default_role/vars"
+  - path: "/etc/ansible/default_role/templates"
+  - path: "/etc/ansible/default_role/meta"
+
+_ansible_default_role_files:
+  - dest: "/etc/ansible/default_role/tasks/main.yml"
+    content: |
+      ---
+      - include: install.yml
+      - include: config.yml
+      - include: service.yml
+  - dest: "/etc/ansible/default_role/tasks/install.yml"
+    content: |
+      ---
+      # content of install.yml
+  - dest: "/etc/ansible/default_role/tasks/config.yml"
+    content: |
+      ---
+      # content of config.yml
+  - dest: "/etc/ansible/default_role/tasks/service.yml"
+    content: |
+      ---
+      # content of service.yml
+  - dest: "/etc/ansible/default_role/defaults/main.yml"
+    content: |
+      ---
+      # content of defaults/main.yml
+  - dest: "/etc/ansible/default_role/templates/hello.yml.j2"
+    content: |
+      Hello world!
+  - dest: "/etc/ansible/default_role/meta/main.yml.j2"
+    content: |
+      ---
+      galaxy_info:
+        role_name: {{ fule_role_name }}
+        namespace: {{ fule_namespace }}
+        license: "MIT"
+      dependencies: []
+

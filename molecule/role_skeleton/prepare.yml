@@ -1,0 +1,30 @@
+---
+- name: Default | Prepare
+  hosts: all
+  gather_facts: false
+  tasks:
+
+    - name: Prepare | Include variables
+      ansible.builtin.include_vars:
+        file: "./variables.yml"
+
+    - name: Prepare | Create default Ansible role directories
+      ansible.builtin.file:
+        state: "{{ item['state'] | default('directory') }}"
+        path: "{{ item['path'] }}"
+        owner: root
+        group: root
+        mode: "{{ item['mode'] | default('0744') }}"
+      loop: "{{ _ansible_default_role_dirs }}"
+      become: true
+
+    - name: Prepare | Create default Ansible role files
+      ansible.builtin.copy:
+        dest: "{{ item['dest'] }}"
+        content: "{{ item['content'] | default(omit) }}"
+        owner: root
+        group: root
+        mode: '0644'
+        force: true
+      loop: "{{ _ansible_default_role_files }}"
+      become: true
