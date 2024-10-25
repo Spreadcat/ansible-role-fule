@@ -5,14 +5,10 @@
   loop:
     - parameter: role-skeleton
       value: "{{ fule_role_skeleton }}"
-      condition: "fule_role_skeleton is defined"
+      condition: "fule_role_skeleton | length > 0"
     - parameter: "init-path"
       value: "{{ fule_working_dir }}"
   when: "{{ item['condition'] | default(true) }}"
-
-- name: output
-  ansible.builtin.debug:
-    var: _ag_parameters
 
 # Install tasks for this roles
 - name: Install | Create the role with molecule
@@ -20,9 +16,6 @@
     cmd: "ansible-galaxy role init {{ _ag_parameters }} {{ fule_role_name }}"
     chdir: "{{ fule_working_dir }}"
     creates: "{{ fule_working_dir }}/{{ fule_role_name }}"
-
-- name: End the play
-  meta: end_play
 
 - name: Install | Set variable with role_path
   ansible.builtin.set_fact:

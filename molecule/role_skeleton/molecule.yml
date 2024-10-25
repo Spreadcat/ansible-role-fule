@@ -56,8 +56,6 @@ verifier:
   name: ansible
 scenario:
   name: role_skeleton
-  converge_sequence:
-    - converge
   test_sequence:
     - destroy
     - syntax

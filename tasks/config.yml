@@ -21,6 +21,10 @@
     file: ./role/update_tasks.yml
   when: fule_modify_role_structure
 
+- name: output
+  ansible.builtin.debug:
+    var: fule_replace_meta_file
+
 - name: Config | Update role meta information
   when: fule_replace_meta_file
   block:

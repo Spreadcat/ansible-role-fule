@@ -41,39 +41,47 @@ _ansible_default_role_dirs:
   - path: "/etc/ansible/default_role/vars"
   - path: "/etc/ansible/default_role/templates"
   - path: "/etc/ansible/default_role/meta"
+  - path: "/etc/ansible/default_role/files"
+
 
 _ansible_default_role_files:
   - dest: "/etc/ansible/default_role/tasks/main.yml"
     content: |
       ---
+      # Role skeleton
       - include: install.yml
       - include: config.yml
       - include: service.yml
   - dest: "/etc/ansible/default_role/tasks/install.yml"
     content: |
       ---
+      # Role skeleton
       # content of install.yml
   - dest: "/etc/ansible/default_role/tasks/config.yml"
     content: |
       ---
+      # Role skeleton
       # content of config.yml
   - dest: "/etc/ansible/default_role/tasks/service.yml"
     content: |
       ---
+      # Role skeleton
       # content of service.yml
   - dest: "/etc/ansible/default_role/defaults/main.yml"
     content: |
       ---
+      # Role skeleton
       # content of defaults/main.yml
   - dest: "/etc/ansible/default_role/templates/hello.yml.j2"
     content: |
+      # Role skeleton
       Hello world!
   - dest: "/etc/ansible/default_role/meta/main.yml.j2"
     content: |
       ---
+      # Role skeleton
       galaxy_info:
         role_name: {{ fule_role_name }}
         namespace: {{ fule_namespace }}
         license: "MIT"
       dependencies: []
-
